@@ -22,7 +22,7 @@ public class AuthenticationScreenModule extends ReactContextBaseJavaModule {
 
   private Callback mCallback;
 
-  private AuthenticationActivityEventListener mActivityEventListener;
+  private AuthenticationScreenActivityEventListener mActivityEventListener;
   private final ReactApplicationContext mReactContext;
 
   Activity mActivity;
@@ -34,7 +34,7 @@ public class AuthenticationScreenModule extends ReactContextBaseJavaModule {
     super(reactContext);
     mKeyguardManager = (KeyguardManager) reactContext.getSystemService(Context.KEYGUARD_SERVICE);
     mReactContext = reactContext;
-    mActivityEventListener = new AuthenticationActivityEventListener(reactContext, new ActivityResultInterface() {
+    mActivityEventListener = new AuthenticationScreenActivityEventListener(reactContext, new ActivityResultInterface() {
       @Override
       public void callback(int requestCode, int resultCode, Intent data) {
         onActivityResult(requestCode, resultCode, data);
