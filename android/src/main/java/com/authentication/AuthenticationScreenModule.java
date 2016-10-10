@@ -14,9 +14,16 @@ import android.content.Context;
 import android.app.KeyguardManager;
 import android.app.Activity;
 
-public class AuthenticationScreenModule extends ReactContextBaseJavaModule implements ActivityEventListener {
+interface ActivityResultInterface {
+  void callback(int requestCode, int resultCode, Intent data);
+}
+
+public class AuthenticationScreenModule extends ReactContextBaseJavaModule {
 
   private Callback mCallback;
+
+  private AuthenticationActivityEventListener mActivityEventListener;
+  private final ReactApplicationContext mReactContext;
 
   Activity mActivity;
 
@@ -26,7 +33,13 @@ public class AuthenticationScreenModule extends ReactContextBaseJavaModule imple
   public AuthenticationScreenModule(ReactApplicationContext reactContext) {
     super(reactContext);
     mKeyguardManager = (KeyguardManager) reactContext.getSystemService(Context.KEYGUARD_SERVICE);
-    reactContext.addActivityEventListener(this);
+    mReactContext = reactContext;
+    mActivityEventListener = new AuthenticationActivityEventListener(reactContext, new ActivityResultInterface() {
+      @Override
+      public void callback(int requestCode, int resultCode, Intent data) {
+        onActivityResult(requestCode, resultCode, data);
+      }
+    });
   }
 
   @Override
@@ -34,7 +47,7 @@ public class AuthenticationScreenModule extends ReactContextBaseJavaModule imple
     return "AuthenticationScreenModule";
   }
 
-  @Override
+
   public void onActivityResult(int requestCode, int resultCode, Intent data) {
     if (requestCode == 1) {
       // Challenge completed, proceed with using cipher
