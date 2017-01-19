@@ -68,7 +68,7 @@ public class AuthenticationScreenModule extends ReactContextBaseJavaModule {
     mCallback = callback;
     System.out.println("SUPPOSED TO BE HEREEEEEEEEEEE");
 
-    Intent intent = mKeyguardManager.createConfirmDeviceCredentialIntent(null, "Reset identity?");
+    Intent intent = mKeyguardManager.createConfirmDeviceCredentialIntent(null, "Sign Transaction?");
 
     if (intent != null) {
       mActivity.startActivityForResult(intent, 1);
