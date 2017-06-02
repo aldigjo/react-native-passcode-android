@@ -73,6 +73,9 @@ public class AuthenticationScreenModule extends ReactContextBaseJavaModule {
     if (intent != null) {
       mActivity.startActivityForResult(intent, 1);
     }
+    else {
+      callback.invoke("No Passcode set", -1);
+    }
   }
 
   // Required for RN 0.30+ modules than implement ActivityEventListener
