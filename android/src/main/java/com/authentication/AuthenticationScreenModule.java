@@ -66,7 +66,6 @@ public class AuthenticationScreenModule extends ReactContextBaseJavaModule {
   public void show(String message, final Callback callback) {
     mActivity = getCurrentActivity();
     mCallback = callback;
-    System.out.println("SUPPOSED TO BE HEREEEEEEEEEEE");
 
     Intent intent = mKeyguardManager.createConfirmDeviceCredentialIntent(null, message);
 
@@ -74,7 +73,7 @@ public class AuthenticationScreenModule extends ReactContextBaseJavaModule {
       mActivity.startActivityForResult(intent, 1);
     }
     else {
-      callback.invoke("No Passcode set", -1);
+      callback.invoke("No Passcode set", null);
     }
   }
 
