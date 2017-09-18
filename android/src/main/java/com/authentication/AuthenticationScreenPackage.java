@@ -16,7 +16,6 @@ public class AuthenticationScreenPackage implements ReactPackage {
     return Arrays.<NativeModule>asList(new AuthenticationScreenModule(reactContext));
   }
 
-  @Override
   public List<Class<? extends JavaScriptModule>> createJSModules() {
     return Collections.emptyList();
   }
