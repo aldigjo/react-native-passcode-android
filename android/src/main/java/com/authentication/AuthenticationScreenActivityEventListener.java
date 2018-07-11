@@ -13,14 +13,13 @@ public class AuthenticationScreenActivityEventListener implements ActivityEventL
         mCallback = callback;
     }
 
-    // < RN 0.33.0
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        mCallback.callback(requestCode, resultCode, data);
-    }
-
     // >= RN 0.33.0
+    @Override
     public void onActivityResult(Activity activity, int requestCode, int resultCode, Intent data) {
         mCallback.callback(requestCode, resultCode, data);
     }
+
+    // Required for RN 0.30+ modules than implement ActivityEventListener
+    @Override
+    public void onNewIntent(Intent intent) { }
 }
