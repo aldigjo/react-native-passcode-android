@@ -83,8 +83,18 @@ public class AuthenticationScreenModule extends ReactContextBaseJavaModule {
       return mKeyguardManager.createConfirmDeviceCredentialIntent(title, description);
     } else {
       Intent intent = new Intent("android.app.action.CONFIRM_DEVICE_CREDENTIAL");
-      intent.putExtra("android.app.extra.TITLE", title);
-      intent.putExtra("android.app.extra.DESCRIPTION", description);
+
+      String content;
+
+      if (title != null) {
+        content = title.toString();
+        content += "\n\n";
+        content += description;
+      } else {
+        content = description.toString();
+      }
+
+      intent.putExtra("android.app.extra.TITLE", content);
 
       // explicitly set the package for security
       intent.setPackage(getSettingsPackageForIntent(intent));
